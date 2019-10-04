@@ -19,7 +19,7 @@ const App = () => {
     setBad(bad + 1)
   }
 
-  
+
 
   return (
     <div>
@@ -50,17 +50,30 @@ const Statistics = ({ good, bad, neutral }) => {
     return (0)
   }
 
-  return (
-    <div>
-      <h2> Statistics </h2>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {good + neutral + bad}</p>
-      <p>average {avg()}</p>
-      <p>positive {positive()}</p>
-    </div>
-  )
+  if (good + bad + neutral > 0) {
+    return (
+      <div>
+        <h2> Statistics </h2>
+        <Statistic text='good' value={good} />
+        <Statistic text='neutral' value={neutral} />
+        <Statistic text='bad' value={bad} />
+        <Statistic text='all' value={good + neutral + bad} />
+        <Statistic text='average' value={avg()} />
+        <Statistic text='positive' value={positive()} />
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <h2> Statistics </h2>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+}
+
+const Statistic = ({ text, value }) => {
+  return (<p>{text} {value}</p>)
 }
 
 
