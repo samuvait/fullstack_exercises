@@ -57,20 +57,15 @@ const Content = ({ parts }) => {
 }
 
 const Total = ({ parts }) => {
-  const countTotal = ({ exerCount }) => {
-    console.log(exerCount)
-    let sum = 0
-    for (let i = 0; i < exerCount.length; i++) {
-      sum += exerCount[i]
-    }
-    console.log(sum)
-    return (sum)
-  }
 
-  console.log(parts.length)
-  let exerCount = parts.map(part => part.exercises)
+  const countTotal = parts.reduce( (s, p) => {
+    console.log('hmm', s, p)
+    return s + p.exercises
+  }, 0)
+
+  console.log(countTotal)
   return (
-    <p>Number of exercises {countTotal({exerCount})}</p>
+    <p>Number of exercises {countTotal}</p>
   )
 }
 
