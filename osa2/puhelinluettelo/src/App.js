@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Persons from './components/Persons'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm';
 
 const App = () => {
   const [ persons, setPersons] = useState([
@@ -10,47 +12,18 @@ const App = () => {
   ])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
-
-  const addPerson = (event) => {
-    event.preventDefault()
-    if(!persons.map(ppl => ppl.name).includes(newName)) {
-      const newPerson = {
-        name: newName,
-        number: newNumber
-      }
-      console.log('add', newName)
-      setPersons(persons.concat(newPerson))
-      setNewName('')
-      setNewNumber('')
-    } else {
-      window.alert(`${newName} is already added to phonebook`)
-    }
-  }
-
-  const handleNameChange = (event) => {
-    console.log(event.target.value)
-    setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-    console.log(event.target.value)
-    setNewNumber(event.target.value)
-  }
+  const [ filterTerm, setFilterTerm] = useState('')
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>number: <input value={newNumber} onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <Persons persons={persons} />
+      <Filter persons={persons} filterTerm={filterTerm} setFilterTerm={setFilterTerm}/>
+
+      <h2>add new</h2>
+      <PersonForm persons={persons} newName={newName} newNumber={newNumber} setPersons={setPersons} setNewName={setNewName} setNewNumber={setNewNumber} />
+
+      <h2>Numbers</h2>
+      <Persons persons={persons} filterTerm={filterTerm}/>
     </div>
   )
 }
