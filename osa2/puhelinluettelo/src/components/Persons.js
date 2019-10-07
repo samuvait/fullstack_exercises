@@ -4,7 +4,7 @@ import Person from './Person'
 const Persons = (props) => {
 
   const people = () => {
-    let list = props.persons.map(ppl => <p><Person key={ppl.name} name={ppl.name} /></p>)
+    let list = props.persons.map(ppl => <p><Person key={ppl.name} name={ppl.name} number={ppl.number} /></p>)
     //console.log(list)
     return (list)
   }
