@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import Weather from './Weather'
 
 const Countries = ({ findTerm, setFindTerm }) => {
 
@@ -46,6 +47,8 @@ const Countries = ({ findTerm, setFindTerm }) => {
           {country.languages.map(lang => <li>{lang.name}</li>)}
         </ul>
         <img src={country.flag} alt={country.name} width='450' length ='275' />
+
+        <Weather name={country.capital}/>
       </div>
     )
   } else {
