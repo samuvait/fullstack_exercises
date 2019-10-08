@@ -15,7 +15,7 @@ const App = () => {
       <form>
         find countries <input value={findTerm} onChange={handleFindChange}/>
       </form>
-      <Countries findTerm={findTerm}/>
+      <Countries findTerm={findTerm} setFindTerm={setFindTerm}/>
     </div>
   )
 }

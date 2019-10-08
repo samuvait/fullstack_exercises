@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
-const Countries = ({ findTerm }) => {
+const Countries = ({ findTerm, setFindTerm }) => {
 
   let [countries, setCountries] = useState([])
 
@@ -18,6 +18,11 @@ const Countries = ({ findTerm }) => {
 
   const list = countries.filter(country => country.name.toLowerCase().includes(findTerm.toLowerCase()))
 
+  const showCountry = (name) => {
+    console.log('country', name)
+    setFindTerm(name)
+  }
+
   console.log('countries', countries)
   console.log('list', list)
   if (list.length < 10 && list.length > 1) {
@@ -25,7 +30,7 @@ const Countries = ({ findTerm }) => {
     return (
       <div>
         <ul>
-          {list.map(country => <li>{country.name}</li>)}
+          {list.map(country => <li>{country.name} <button onClick={() => showCountry(country.name)}>show</button></li>)}
         </ul>      
       </div>
     )
