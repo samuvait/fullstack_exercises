@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import personService from '../services/persons'
 
-const PersonForm = ({ persons, setPersons }) => {
-  const [ newName, setNewName ] = useState('')
-  const [ newNumber, setNewNumber ] = useState('')
+const PersonForm = ({ persons, setPersons, message, setMessage }) => {
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -23,10 +23,11 @@ const PersonForm = ({ persons, setPersons }) => {
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
         })
-      
+
+      setMessage(`Added ${newName}`)
       setNewName('')
       setNewNumber('')
-    } else if (!persons.map(ppl => ppl.number).includes(newNumber)){
+    } else if (!persons.map(ppl => ppl.number).includes(newNumber)) {
       //window.alert(`${newName} is already added to phonebook`)
       let confirmed = window.confirm(`${newName} is already added to the phonebook, do you wish to replace the old number with the new one?`)
       if (confirmed) {
@@ -34,6 +35,9 @@ const PersonForm = ({ persons, setPersons }) => {
         personService.update(id, newPerson).then(newPerson => {
           setPersons(persons.map(person => person.id !== id ? person : newPerson))
         })
+        setMessage(`Changed number of ${newName}`)
+        setNewName('')
+        setNewNumber('')
       }
     }
   }
