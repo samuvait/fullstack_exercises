@@ -1,24 +1,40 @@
 import React from 'react'
 import Person from './Person'
+import personService from '../services/persons'
 
-const Persons = (props) => {
+const Persons = ({ persons, setPersons, filterTerm }) => {
+
+  const removePerson = (ppl) => {
+    let confirmed = window.confirm(`Delete ${ppl.name}`)
+    if (confirmed) {
+      personService.remove(ppl.id).then(() => {
+        console.log(`${ppl.id} removed`)
+        setPersons(persons.filter(person => person.id !== ppl.id))
+        console.log(persons)
+      })
+    } else {
+      console.log("Didn't delete")
+    }
+  }
 
   const people = () => {
     let shown = []
-    props.persons.forEach((person, i) => {
-      if(person.name.toLowerCase().includes(props.filterTerm.toLowerCase())) {
+    persons.forEach((person, i) => {
+      if (person.name.toLowerCase().includes(filterTerm.toLowerCase())) {
         console.log(person.name)
         shown = shown.concat(person)
         console.log(shown)
       }
     });
     console.log(shown)
-    return (shown.map(ppl => <Person key={ppl.name} name={ppl.name} number={ppl.number} />))
+    return (shown.map(ppl => <li key={ppl.id}><Person name={ppl.name} number={ppl.number} /> <button onClick={() => removePerson(ppl)}>delete</button> </li>))
   }
 
   return (
     <div>
-      {people()}
+      <ul>
+        {people()}
+      </ul>
     </div>
   )
 }
