@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
-const PersonForm = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumber }) => {
+const PersonForm = ({ persons, setPersons }) => {
+  const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber ] = useState('')
 
   const addPerson = (event) => {
+
     event.preventDefault()
     if(!persons.map(ppl => ppl.name).includes(newName)) {
       const newPerson = {
@@ -10,6 +14,12 @@ const PersonForm = ({ persons, newName, newNumber, setPersons, setNewName, setNe
         number: newNumber
       }
       console.log('add', newName)
+
+      axios.post('http://localhost:3001/persons', newPerson)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+        })
+
       setPersons(persons.concat(newPerson))
       setNewName('')
       setNewNumber('')

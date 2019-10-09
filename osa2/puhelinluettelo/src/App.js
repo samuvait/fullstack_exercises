@@ -6,8 +6,6 @@ import axios from 'axios';
 
 const App = () => {
   const [ persons, setPersons] = useState([])
-  const [ newName, setNewName ] = useState('')
-  const [ newNumber, setNewNumber ] = useState('')
   const [ filterTerm, setFilterTerm] = useState('')
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const App = () => {
       <Filter persons={persons} filterTerm={filterTerm} setFilterTerm={setFilterTerm}/>
 
       <h2>add new</h2>
-      <PersonForm persons={persons} newName={newName} newNumber={newNumber} setPersons={setPersons} setNewName={setNewName} setNewNumber={setNewNumber} />
+      <PersonForm persons={persons} setPersons={setPersons} />
 
       <h2>Numbers</h2>
       <Persons persons={persons} filterTerm={filterTerm}/>
