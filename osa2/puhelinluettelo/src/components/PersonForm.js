@@ -43,6 +43,7 @@ const PersonForm = ({ persons, setPersons, setType, setMessage }) => {
             setMessage(
               `Person ${newName} was already removed from server`
             )
+            setPersons(persons.filter(person => person.id !== id))
           })
           setTimeout(() => {
             setMessage(null)
