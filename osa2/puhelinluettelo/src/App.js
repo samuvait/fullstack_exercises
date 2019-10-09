@@ -8,6 +8,7 @@ const App = () => {
   const [ persons, setPersons] = useState([])
   const [ filterTerm, setFilterTerm] = useState('')
   const [ message, setMessage ] = useState(null)
+  const [ type, setType ] = useState('')
 
   useEffect(() => {
     //console.log('effect')
@@ -22,15 +23,15 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-      <Notification message={message}/>
+      <Notification message={message} type={type}/>
 
       <Filter persons={persons} filterTerm={filterTerm} setFilterTerm={setFilterTerm}/>
 
       <h2>add new</h2>
-      <PersonForm persons={persons} setPersons={setPersons} message={message} setMessage={setMessage}/>
+      <PersonForm persons={persons} setPersons={setPersons} setType={setType} setMessage={setMessage}/>
 
       <h2>Numbers</h2>
-      <Persons persons={persons} setPersons={setPersons} filterTerm={filterTerm} setMessage={setMessage}/>
+      <Persons persons={persons} setPersons={setPersons} filterTerm={filterTerm} setType={setType} setMessage={setMessage}/>
     </div>
   )
 }
@@ -40,7 +41,7 @@ const Notification = ({ message, type }) => {
     return null
   } else {
     return (
-      <div className='success'>
+      <div className={type}>
         {message}
       </div>
     )

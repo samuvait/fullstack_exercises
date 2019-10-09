@@ -2,7 +2,7 @@ import React from 'react'
 import Person from './Person'
 import personService from '../services/persons'
 
-const Persons = ({ persons, setPersons, filterTerm, setMessage}) => {
+const Persons = ({ persons, setPersons, filterTerm, setType, setMessage}) => {
 
   const removePerson = (ppl) => {
     let confirmed = window.confirm(`Delete ${ppl.name}`)
@@ -12,6 +12,7 @@ const Persons = ({ persons, setPersons, filterTerm, setMessage}) => {
         setPersons(persons.filter(person => person.id !== ppl.id))
         console.log(persons)
       })
+      setType('success')
       setMessage(`Deleted ${ppl.name}`)
     } else {
       console.log("Didn't delete")

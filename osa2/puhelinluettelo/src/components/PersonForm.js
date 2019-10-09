@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import personService from '../services/persons'
 
-const PersonForm = ({ persons, setPersons, message, setMessage }) => {
+const PersonForm = ({ persons, setPersons, setType, setMessage }) => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
@@ -24,6 +24,7 @@ const PersonForm = ({ persons, setPersons, message, setMessage }) => {
           setPersons(persons.concat(returnedPerson))
         })
 
+      setType('success')
       setMessage(`Added ${newName}`)
       setNewName('')
       setNewNumber('')
@@ -32,10 +33,21 @@ const PersonForm = ({ persons, setPersons, message, setMessage }) => {
       let confirmed = window.confirm(`${newName} is already added to the phonebook, do you wish to replace the old number with the new one?`)
       if (confirmed) {
         let id = persons[i].id
-        personService.update(id, newPerson).then(newPerson => {
-          setPersons(persons.map(person => person.id !== id ? person : newPerson))
-        })
-        setMessage(`Changed number of ${newName}`)
+        personService
+          .update(id, newPerson).then(newPerson => {
+            setPersons(persons.map(person => person.id !== id ? person : newPerson))
+            setMessage(`Changed number of ${newName}`)
+          })
+          .catch(error => {
+            setType('error')
+            setMessage(
+              `Person ${newName} was already removed from server`
+            )
+          })
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+
         setNewName('')
         setNewNumber('')
       }
