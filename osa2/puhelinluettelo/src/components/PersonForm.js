@@ -6,13 +6,17 @@ const PersonForm = ({ persons, setPersons }) => {
   const [ newNumber, setNewNumber ] = useState('')
 
   const addPerson = (event) => {
-
     event.preventDefault()
-    if(!persons.map(ppl => ppl.name).includes(newName)) {
-      const newPerson = {
-        name: newName,
-        number: newNumber
-      }
+    let i = persons.findIndex(person => person.name === newName)
+
+    const newPerson = {
+      name: newName,
+      number: newNumber
+    }
+
+    console.log(i)
+
+    if (i < 0) {
       console.log('add', newName)
 
       personService.create(newPerson)
@@ -22,8 +26,15 @@ const PersonForm = ({ persons, setPersons }) => {
       
       setNewName('')
       setNewNumber('')
-    } else {
-      window.alert(`${newName} is already added to phonebook`)
+    } else if (!persons.map(ppl => ppl.number).includes(newNumber)){
+      //window.alert(`${newName} is already added to phonebook`)
+      let confirmed = window.confirm(`${newName} is already added to the phonebook, do you wish to replace the old number with the new one?`)
+      if (confirmed) {
+        let id = persons[i].id
+        personService.update(id, newPerson).then(newPerson => {
+          setPersons(persons.map(person => person.id !== id ? person : newPerson))
+        })
+      }
     }
   }
 
