@@ -15,8 +15,9 @@
     "eject": "react-scripts eject",
     "server": "json-server -p3001 db.json"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "json-server": "^0.15.1"
   },
   "browserslist": {
     "production": [
@@ -29,8 +30,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "json-server": "^0.15.1"
   }
 }
