@@ -22,10 +22,14 @@ const PersonForm = ({ persons, setPersons, setType, setMessage }) => {
       personService.create(newPerson)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setType('success')
+          setMessage(`Added ${newName}`)
+        }).catch(error => {
+          console.log(error.response.data)
+          setType('error')
+          setMessage(error.response.data.error)
         })
-
-      setType('success')
-      setMessage(`Added ${newName}`)
+      
       setNewName('')
       setNewNumber('')
     } else if (!persons.map(ppl => ppl.number).includes(newNumber)) {
@@ -45,9 +49,9 @@ const PersonForm = ({ persons, setPersons, setType, setMessage }) => {
             )
             setPersons(persons.filter(person => person.id !== id))
           })
-          setTimeout(() => {
-            setMessage(null)
-          }, 5000)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
 
         setNewName('')
         setNewNumber('')
