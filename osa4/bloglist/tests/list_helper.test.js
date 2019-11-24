@@ -60,6 +60,12 @@ const blogsExample = [
 
 const blogLikeSum = 36
 
+const favouriteExample = {
+  title: "Canonical string reduction",
+  author: "Edsger W. Dijkstra",
+  likes: 12
+}
+
 describe('Number of likes', () => {
   test('Correctly sums likes', () => {
     expect(listHelper.totalLikes(blogsExample)).toBe(blogLikeSum)
@@ -71,5 +77,22 @@ describe('Number of likes', () => {
 
   test('Handles list with one item', () => {
     expect(listHelper.totalLikes([{title: '', author: '', url: '', likes: 10}])).toBe(10)
+  })
+})
+
+describe('Favourite Blog', () => {
+  test('Favourite blog from multiple', () => {
+    expect(listHelper.favouriteBlog(blogsExample)).toEqual(favouriteExample)
+  })
+
+  test('Handles empty list', () => {
+    expect(listHelper.favouriteBlog([])).toEqual({})
+  })
+
+  test('Handles list with one item', () => {
+    let ex = {title: 'Example', author: 'Maija', url: 'www.kappa.com', likes: 10}
+    let ex2 = {title: 'Example', author: 'Maija', likes: 10}
+
+    expect(listHelper.favouriteBlog([ex])).toEqual(ex2)
   })
 })
