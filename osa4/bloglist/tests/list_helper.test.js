@@ -111,3 +111,17 @@ describe('Most blogs', () => {
     expect(listHelper.mostBlogs([])).toEqual({})
   })
 })
+
+describe('Most Likes', () => {
+  test('Most Likes from multiple', () => {
+    expect(listHelper.mostLikes(blogsExample)).toEqual({"author": "Edsger W. Dijkstra", "likes": 17})
+  })
+
+  test('Favourite blog from list with one', () => {
+    expect(listHelper.mostLikes([exWOne])).toEqual({"author": "Maija Poppanen", "likes": 10})
+  })
+
+  test('Favourite blog from empty list', () => {
+    expect(listHelper.mostLikes([])).toEqual({})
+  })
+})
