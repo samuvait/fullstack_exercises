@@ -60,6 +60,8 @@ const blogsExample = [
 
 const blogLikeSum = 36
 
+exWOne = {_id: "5a422a851b54a676234d17f7", title: 'Example', author: 'Maija Poppanen', url: 'www.kappa.com', likes: 10, __v: 0}
+
 const favouriteExample = {
   title: "Canonical string reduction",
   author: "Edsger W. Dijkstra",
@@ -90,9 +92,22 @@ describe('Favourite Blog', () => {
   })
 
   test('Handles list with one item', () => {
-    let ex = {title: 'Example', author: 'Maija', url: 'www.kappa.com', likes: 10}
-    let ex2 = {title: 'Example', author: 'Maija', likes: 10}
+    let ex2 = {title: 'Example', author: 'Maija Poppanen', likes: 10}
 
-    expect(listHelper.favouriteBlog([ex])).toEqual(ex2)
+    expect(listHelper.favouriteBlog([exWOne])).toEqual(ex2)
+  })
+})
+
+describe('Most blogs', () => {
+  test('Favourite blog from multiple', () => {
+    expect(listHelper.mostBlogs(blogsExample)).toEqual({"author": "Robert C. Martin", "blogs": 3})
+  })
+
+  test('Favourite blog from list with one', () => {
+    expect(listHelper.mostBlogs([exWOne])).toEqual({"author": "Maija Poppanen", "blogs": 1})
+  })
+
+  test('Favourite blog from empty list', () => {
+    expect(listHelper.mostBlogs([])).toEqual({})
   })
 })
