@@ -1,0 +1,9 @@
+PUT  http://localhost:3001/api/blogs/5ddbd7a10c7e36346fdefcc2
+Content-Type: application/json
+
+{
+  "title": "VeggieSauce",
+  "author": "Maija Meikalainen",
+  "url": "www.this.com/that",
+  "likes": 8
+}
