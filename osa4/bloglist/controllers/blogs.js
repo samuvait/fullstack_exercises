@@ -7,11 +7,17 @@ blogsRouter.get('/', async (request, response) => {
 })
 
 blogsRouter.post('/', async (request, response) => {
-  const blog = new Blog(request.body)
+  const blog = request.body
+  const newBlog = new Blog({
+    title: blog.title,
+    author: blog.author,
+    url: blog.url,
+    likes: blog.likes || 0
+  })
 
   try {
-    const saved = await blog.save()
-    response.status(201).json(saved.toJSON)
+    const saved = await newBlog.save()
+    response.status(201).json(saved.toJSON())
   } catch (exception) {
     console.log('exception', exception)
   }

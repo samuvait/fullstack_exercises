@@ -58,6 +58,19 @@ describe('Post blogs works correctly', () => {
     const titles = blogsAtEnd.map(blog => blog.title)
     expect(titles).toContain('Raising children')
   })
+
+  test('Adding a new blog without likes creates one with 0', async () => {
+    const noLikes = {title: 'Raising children', author: 'Maija Poppanen', url: 'www.kappa.com'}
+
+    const res = await api
+      .post('/api/blogs')
+      .send(noLikes)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    // console.log('res', res.body)
+    expect(res.body.likes).toBe(0)
+  })
 })
 
 afterAll(() => {
