@@ -8,9 +8,15 @@ mongoose.connect(config.mongoUrl, { useNewUrlParser: true }).then(res => {
 })
 
 const blogSchema = mongoose.Schema({
-  title: String,
+  title: {
+    type: String,
+    required: true
+  },
   author: String,
-  url: String,
+  url: {
+    type: String,
+    required: true
+  },
   likes: Number
 })
 

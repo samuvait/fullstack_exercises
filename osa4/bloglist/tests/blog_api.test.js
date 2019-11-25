@@ -71,6 +71,15 @@ describe('Post blogs works correctly', () => {
     // console.log('res', res.body)
     expect(res.body.likes).toBe(0)
   })
+
+  test('Adding a new blog without url and title does not work', async () => {
+    const noTitle = {author: 'Maija Poppanen', likes: 1}
+
+    const res = await api
+      .post('/api/blogs')
+      .send(noTitle)
+      .expect(400)
+  })
 })
 
 afterAll(() => {

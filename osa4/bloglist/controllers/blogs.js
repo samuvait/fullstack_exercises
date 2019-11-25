@@ -18,8 +18,8 @@ blogsRouter.post('/', async (request, response) => {
   try {
     const saved = await newBlog.save()
     response.status(201).json(saved.toJSON())
-  } catch (exception) {
-    console.log('exception', exception)
+  } catch (error) {
+    response.status(400).json({ error: error.message })
   }
 })
 
