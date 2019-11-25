@@ -34,9 +34,13 @@ describe('Get blogs works correctly', () => {
 
     expect(titles).toContain('Go To Statement Considered Harmful')
   })
+
+  test('Id is named "id" not "_id"', async () => {
+    const res = await api.get('/api/blogs')
+    console.log('id',res.body[0])
+    expect(res.body[0].id).toBeDefined()
+  })
 })
-
-
 
 afterAll(() => {
   mongoose.connection.close()
