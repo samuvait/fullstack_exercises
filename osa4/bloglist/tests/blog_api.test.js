@@ -37,8 +37,26 @@ describe('Get blogs works correctly', () => {
 
   test('Id is named "id" not "_id"', async () => {
     const res = await api.get('/api/blogs')
-    console.log('id',res.body[0])
+    // console.log('id', res.body[0])
     expect(res.body[0].id).toBeDefined()
+  })
+})
+
+describe('Post blogs works correctly', () => {
+  const newBlog = helper.exWOne
+
+  test('Adding a new blog works', async () => {
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDB()
+    expect(blogsAtEnd.length).toBe(helper.blogsExample.length + 1)
+
+    const titles = blogsAtEnd.map(blog => blog.title)
+    expect(titles).toContain('Raising children')
   })
 })
 

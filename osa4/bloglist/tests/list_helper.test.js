@@ -12,7 +12,7 @@ blogsExample = helper.blogsExample
 
 const blogLikeSum = 36
 
-exWOne = {_id: "5a422a851b54a676234d17f7", title: 'Example', author: 'Maija Poppanen', url: 'www.kappa.com', likes: 10, __v: 0}
+exWOne = helper.exWOne
 
 const favouriteExample = {
   title: "Canonical string reduction",
@@ -44,7 +44,7 @@ describe('Favourite Blog', () => {
   })
 
   test('Handles list with one item', () => {
-    let ex2 = {title: 'Example', author: 'Maija Poppanen', likes: 10}
+    let ex2 = {title: 'Raising children', author: 'Maija Poppanen', likes: 10}
 
     expect(listHelper.favouriteBlog([exWOne])).toEqual(ex2)
   })
