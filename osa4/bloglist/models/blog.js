@@ -1,11 +1,5 @@
 const mongoose = require('mongoose')
-const config = require('../utils/config')
-
-mongoose.connect(config.mongoUrl, { useNewUrlParser: true }).then(res => {
-  console.log('Connected to MongoDB')
-}).catch((error) => {
-  console.log('Error connecting to MongoDB', error.message)
-})
+const uniqueValidator = require('mongoose-unique-validator')
 
 const blogSchema = mongoose.Schema({
   title: {
@@ -17,7 +11,11 @@ const blogSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  likes: Number
+  likes: Number,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 blogSchema.set('toJSON', {
@@ -26,5 +24,7 @@ blogSchema.set('toJSON', {
     delete returnedObject._id
   }
 })
+
+blogSchema.plugin(uniqueValidator)
 
 module.exports = mongoose.model('Blog', blogSchema)
