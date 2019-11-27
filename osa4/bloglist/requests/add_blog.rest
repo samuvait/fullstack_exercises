@@ -1,13 +1,12 @@
 POST  http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZlcm1pIiwiaWQiOiI1ZGRlNjU5ZGY1Y2U2NjI5ZmJlYmVjMTciLCJpYXQiOjE1NzQ4NTYxMTJ9.RKOdaDyafFvK5swC9i0St0MuAw06wsMT4RKotQZhJxU
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZlcm1pIiwiaWQiOiI1ZGRlNjU5ZGY1Y2U2NjI5ZmJlYmVjMTciLCJpYXQiOjE1NzQ4NTc3Nzl9.WBVJchKqSKSgtXxmoONxMpzO5eocX6GmzPHr4jK5fB8
 
 {
-  "title": "New with Token",
-  "author": "Pekka Puupaa",
-  "url": "www.this.com/that",
-  "likes": 6,
-  "user": "5dde51bbb4e727157ea9406e"
+  "title": "Fun Stuff",
+  "author": "Erkki Koivisto",
+  "url": "www.this.com/that/app",
+  "likes": 6
 }
 
 ###

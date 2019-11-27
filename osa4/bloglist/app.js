@@ -7,10 +7,12 @@ const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const mongoose = require('mongoose')
 const config = require('./utils/config')
+const middleware = require('./utils/middleware')
 
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use(middleware.tokenExtractor)
 
 mongoose.connect(config.mongoUrl, { useNewUrlParser: true }).then(res => {
   console.log('Connected to MongoDB')
