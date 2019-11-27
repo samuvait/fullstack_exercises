@@ -1,4 +1,5 @@
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 const blogsExample = [
   {
@@ -48,18 +49,46 @@ const blogsExample = [
     url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
     likes: 2,
     __v: 0
-  }  
+  }
 ]
 
-const exWOne = {title: 'Raising children', author: 'Maija Poppanen', url: 'www.kappa.com', likes: 10}
+const usersExample = [
+  {
+    blogs: [],
+    username: "pek",
+    name: "Pekka Puupaa",
+    ObjectId: "5dde50cbd714d31417957901"
+  },
+  {
+    blogs: [],
+    username: "maj",
+    name: "Maija Meikalainen",
+    ObjectId: "5dde51bbb4e727157ea9406e"
+  }
+]
+
+const exWOne = { title: 'Raising children', author: 'Maija Poppanen', url: 'www.kappa.com', likes: 10 }
+const oneUser = { username: 'tauno', name: 'Tauno Pelti', password: 'testexample' }
+const invalidpw = { username: 'tauno', name: 'Tauno Pelti', password: 'te' }
+const invalidname = { username: 'ta', name: 'Tauno Pelti', password: 'testexample' }
 
 const blogsInDB = async () => {
   const blogs = await Blog.find({})
   return blogs.map(blog => blog.toJSON())
 }
 
+const usersInDB = async () => {
+  const users = await User.find({})
+  return users.map(user => user.toJSON())
+}
+
 module.exports = {
   blogsExample,
   exWOne,
-  blogsInDB
+  blogsInDB,
+  usersExample,
+  oneUser,
+  usersInDB,
+  invalidpw,
+  invalidname
 }

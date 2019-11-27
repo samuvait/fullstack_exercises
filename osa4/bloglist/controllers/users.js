@@ -6,18 +6,23 @@ usersRouter.post('/', async (request, response, next) => {
   try {
     const body = request.body
 
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.password, saltRounds)
+    if (body.password.length < 3) {
+      console.log('pwbad')
+      response.status(400).json({ error: 'password not valid' })
+    } else {
+      const saltRounds = 10
+      const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
-    const user = new User({
-      username: body.username,
-      name: body.name,
-      passwordHash,
-    })
+      const user = new User({
+        username: body.username,
+        name: body.name,
+        passwordHash,
+      })
 
-    const savedUser = await user.save()
+      const savedUser = await user.save()
 
-    response.json(savedUser)
+      response.json(savedUser)
+    }
   } catch (error) {
     response.status(400).json({ error: error.message })
   }
